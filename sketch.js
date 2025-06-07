@@ -44,7 +44,14 @@ function draw() {
   let rightHand = null;
 
   if (handLandmarks.length > 0) {
-    for (let hand of handLandmarks) {
+    for (let i = 0; i < handLandmarks.length; i++) {
+      let hand = handLandmarks[i];
+      for (let point of hand) {
+        fill(255, 200);
+        noStroke();
+        ellipse(point.x * width, point.y * height, 10, 10);
+      }
+
       let wristX = hand[0].x;
       if (wristX < 0.5 && !leftHand) {
         leftHand = hand;
