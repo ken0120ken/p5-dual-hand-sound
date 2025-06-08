@@ -1,6 +1,7 @@
 let video;
 let handLandmarks = [];
 let osc;
+let audioStarted = false;
 
 function setup() {
   createCanvas(640, 480);
@@ -9,7 +10,6 @@ function setup() {
   video.hide();
 
   osc = new p5.Oscillator('sine');
-  osc.start();
   osc.amp(0);
 
   const hands = new Hands({locateFile: (file) => {
@@ -34,6 +34,14 @@ function setup() {
   hands.onResults(results => {
     handLandmarks = results.multiHandLandmarks || [];
   });
+}
+
+function mousePressed() {
+  if (!audioStarted) {
+    osc.start();
+    audioStarted = true;
+    console.log("Audio started");
+  }
 }
 
 function draw() {
